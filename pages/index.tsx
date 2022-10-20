@@ -3,22 +3,26 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Feed from '../components/Feed'
 import Sidebar from '../components/Sidebar'
+import TweetBox from '../components/TweetBox'
 import Widgets from '../components/Widgets'
+import { fetchTweets } from '../utils/fetchTweets'
+import { Tweet } from '../typings'
 
-const Home: NextPage = () => {
+interface Props {
+  tweets: Tweet[]
+}
+
+const Home = ({ tweets }: Props) => {
+
   return (
     <div className="mx-auto lg:max-w-6xl max-h-screen overflow-hidden">
-      <Head>
+        <Head>
         <title>Twitter 2.0</title>
-      </Head>
-
+        </Head>
       <main className="grid grid-cols-9"> 
-
-      <Sidebar/>
-
-      <Feed/>
-
-      <Widgets/>
+        <Sidebar/>
+        <Feed/>
+        <Widgets/>
       </main>
     </div>
   )
@@ -31,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
-
-    }
+      tweets,
+    },
   }
 }
