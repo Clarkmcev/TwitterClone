@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, Dispatch, SetStateAction } from 'react'
 import {
     CalendarIcon,
     PhotoIcon,
@@ -12,7 +12,7 @@ import { fetchTweets } from '../utils/fetchTweets'
 import toast from 'react-hot-toast'
 
 interface Props {
-  setTweets: React.Dispatch<React.SetStateAction<Tweet[]>>
+  setTweets: Dispatch<SetStateAction<Tweet[]>>
 }
 
 function TweetBox({ setTweets }: Props) {
@@ -25,9 +25,8 @@ function TweetBox({ setTweets }: Props) {
 
   const [imageUrlBoxIsOpen, setImageUrlBoxIsOpen] = useState<boolean>(false)
 
-  const handleTweet = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log('hey')
     postTweet()
 
     setInput('')
@@ -43,16 +42,18 @@ function TweetBox({ setTweets }: Props) {
       profileImg: session?.user?.image || 'https://links.papareact.com/gll',
       image: image
     }
+
+    console.log(tweetInfo)
+    
     const result = await fetch(`/api/addTweet`, {
       body: JSON.stringify(tweetInfo),
       method: 'POST',
     })
+
     const json = await result.json();
     const newTweets = await fetchTweets()
     setTweets(newTweets)
-    toast('Tweet posted!', {
-      icon: ' '
-    })
+    toast('Tweet posted!')
 
     return json
   }
@@ -79,7 +80,7 @@ function TweetBox({ setTweets }: Props) {
                   <CalendarIcon className="h-5 w-5 cursor-pointer transition-all duration-150 eas-out hover:scale-150"/>
                   <MapIcon className="h-5 w-5 cursor-pointer transition-all duration-150 eas-out hover:scale-150"/>
                 </div>
-                <button disabled={!input} onClick={handleTweet} className="bg-twitter px-5 py-2 text-white font-bold rounded-full disabled:opacity-40">Tweet</button>
+                <button disabled={!input} onClick={handleSubmit} className="bg-twitter px-5 py-2 text-white font-bold rounded-full disabled:opacity-40">Tweet</button>
                 </div>
 
                 {imageUrlBoxIsOpen && (

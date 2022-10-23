@@ -19,6 +19,7 @@ export default async function handler(
                     _type: 'tweet',
                     text: data.text,
                     username: data.username,
+                    blockTweet: false,
                     profileImg: data.profileImg,
                     image: data.image
                 }
@@ -37,9 +38,7 @@ export default async function handler(
         body: JSON.stringify(mutations)
     })
 
-
     const json = await result.json();
-    console.log('hey')
 
   res.status(200).json({ message: 'Added!' })
 }
