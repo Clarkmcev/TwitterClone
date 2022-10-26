@@ -46,7 +46,6 @@ export default  async function handler(
       )
 
       const json = await result.json()
-      console.log(json)
 
   res.status(200).json({ name: 'John Doe' })
 }

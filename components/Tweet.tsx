@@ -44,16 +44,12 @@ function Tweet({tweet}: Props) {
           body: JSON.stringify(comment),
           method: 'POST',
         })
-    
-        console.log('WOOHOO we made it', result)
         toast.success('Comment Posted!', {
           id: commentToast,
         })
-    
         setInput('')
         setCommentBoxVisible(false)
         refreshComments()
-
     }
       
       useEffect(() =>{

@@ -3,12 +3,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { TweetBody } from '../../typings'
 
 type Data = {
-  message: string
+    message: string
 }
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
+    req: NextApiRequest,
+    res: NextApiResponse<Data>
 ) {
     const data: TweetBody = JSON.parse(req.body)
 
@@ -40,5 +40,5 @@ export default async function handler(
 
     const json = await result.json();
 
-  res.status(200).json({ message: 'Added!' })
+    res.status(200).json({ message: 'Added!' })
 }

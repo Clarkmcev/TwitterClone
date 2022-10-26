@@ -20,7 +20,6 @@ function Feed({ tweets: tweetsProp } : Props) {
 
     const tweets = await fetchTweets()
     setTweets(tweets)
-    console.log(tweets)
 
     toast.success('Feed uploaded', {
       id: refreshToast
