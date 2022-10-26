@@ -17,7 +17,7 @@ interface Props {
 }
 
 function Tweet({ tweet }: Props) {
-    const [comments, setComments] = useState<Comment[]>()
+    const [comments, setComments] = useState<Comment[]>('')
     const [commentBoxVisible, setCommentBoxVisible] = useState<boolean>(false)
     const [input, setInput] = useState<string>('')
     const { data: session } = useSession()
